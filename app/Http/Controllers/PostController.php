@@ -18,7 +18,44 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    public function store() {
-        dd(request()->all());
+    public function store(Request $request) {
+        $credentials = $request->validate([
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        /* $post = new Post();
+        $post->title = $credentials['title'];
+        $post->content = $credentials['content'];
+        $post->save(); */
+
+        Post::create($credentials);
+
+        return redirect()->route('posts.index');
+    }
+
+    public function show($id) {
+        $post = Post::findOrFail($id);
+
+        return view('posts.show', compact('post'));
+    }
+
+    public function edit($id) {
+        $post = Post::findOrFail($id);
+
+        return view('posts.edit', compact('post'));
+    }
+
+    public function update(Request $request, $id) {
+        $credentials = $request->validate([
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        $post = Post::findOrFail($id);
+
+        $post->update($credentials);
+
+        return redirect()->route('posts.index');
     }
 }

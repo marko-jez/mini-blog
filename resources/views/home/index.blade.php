@@ -13,6 +13,7 @@
     <div>
         <h3>Slobodno se prebacite na listu svih blogova</h3>
         <a href="{{ route('posts.index') }}">Svi postovi</a>
+        <a href="{{ route('posts.create') }}">Novi post</a>
     </div>
 
 </body>
