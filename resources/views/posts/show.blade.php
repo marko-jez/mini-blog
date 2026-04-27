@@ -11,6 +11,13 @@
 
     <h3>{{ $post->title }}</h3>
     <p>{{ $post->content }}</p>
+    <a href="{{ route('posts.edit', $post->id) }}">Uredi post</a>
+
+    <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit">Obriši</button>
+    </form>
 
 </body>
 </html>
