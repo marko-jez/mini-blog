@@ -1,23 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Forma</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title', 'Novi post')
+
+@section('content')
+    
+
     <h1>Unesi novi post</h1>
 
     <form action="{{ route('posts.store') }}" method="POST">
-        @csrf
+        @csrf <div class="mb-1"> 
         <label for="">Naslov <br>
-            <input type="text" name="title" id="title" value="">
-        </label><br>
-        <label for="content">Sadržaj</label><br>
-        <textarea name="content" id="content" cols="30" rows="10"></textarea><br>
-        <input type="submit" value="Pošalji">
+            <input type="text" name="title" id="title" value="" class="form-control">
+        </label>
+        </div><br>
+        <div class="mb-1">
+            <label for="content">Sadržaj<br>
+            <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+            </label>
+        </div><br>
+        <input type="submit" value="Pošalji" class="btn btn-primary">
     </form>
 
-</body>
-</html>
+    @endsection

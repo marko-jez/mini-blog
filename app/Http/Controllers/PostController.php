@@ -9,7 +9,7 @@ class PostController extends Controller
 {
         public function index() {
 
-        $posts = Post::all();
+        $posts = Post::orderBy('id', 'asc')->get();
 
         return view('posts.index', compact('posts'));
     }
@@ -29,9 +29,9 @@ class PostController extends Controller
         $post->content = $credentials['content'];
         $post->save(); */
 
-        Post::create($credentials);
+        $post = Post::create($credentials);
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.show', $post->id);
     }
 
     public function show($id) {
@@ -56,7 +56,7 @@ class PostController extends Controller
 
         $post->update($credentials);
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.show', $post->id);
     }
 
     public function destroy($id) {

@@ -10,8 +10,8 @@
 
     <div>
         <h3>Slobodno se prebacite na listu svih blogova</h3>
-        <a href="{{ route('posts.index') }}">Svi postovi</a>
-        <a href="{{ route('posts.create') }}">Novi post</a>
+        <a href="{{ route('posts.index') }}" class="btn btn-primary">Svi postovi</a>
+        <a href="{{ route('posts.create') }}"class="btn btn-secondary">Novi post</a>
     </div>
 
 @endsection
