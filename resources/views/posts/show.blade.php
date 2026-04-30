@@ -4,9 +4,13 @@
 
 @section('content')
 
-    <h1>Ovdje će biti prikazan jedan post</h1>
+    @if (session('success'))
+        <div class="alert alert-success d-inline-block">
+            {{ session('success') }}
+        </div>
+    @endif
 
-    <h3>{{ $post->title }}</h3>
+    <h2>{{ $post->title }}</h2>
     <p>{{ $post->content }}</p>
     <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary mb-1">Uredi post</a>
 

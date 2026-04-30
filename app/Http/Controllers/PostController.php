@@ -31,7 +31,7 @@ class PostController extends Controller
 
         $post = Post::create($credentials);
 
-        return redirect()->route('posts.show', $post->id);
+        return redirect()->route('posts.show', $post->id)->with('success', 'Novi post je uspješno kreiran');
     }
 
     public function show($id) {
@@ -56,7 +56,7 @@ class PostController extends Controller
 
         $post->update($credentials);
 
-        return redirect()->route('posts.show', $post->id);
+        return redirect()->route('posts.show', $post->id)->with('success', 'Post je ažuriran');
     }
 
     public function destroy($id) {
@@ -64,6 +64,6 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with('success', "Post '{$post->title}' je obrisan");
     }
 }
