@@ -10,7 +10,10 @@
     <form action="{{ route('posts.store') }}" method="POST">
         @csrf <div class="mb-1"> 
         <label for="">Naslov <br>
-            <input type="text" name="title" id="title" value="" class="form-control">
+            <input type="text" name="title" id="title" value="" class="form-control" value="{{ old('title') }}">
+            @error('title')
+                <p style="color:red">{{ $message }}</p>
+            @enderror
         </label>
         </div><br>
         <div class="mb-1">
