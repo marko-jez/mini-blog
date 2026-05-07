@@ -13,7 +13,7 @@ class StorePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|max:50',
+            'title' => 'required|max:50|min:5',
             'content' => 'required'
         ];
     }
@@ -35,6 +35,7 @@ class StorePostRequest extends FormRequest
         return [
             'title.required' => 'Unos naslova je obavezan',
             'title.max' => 'Prevelik broj znakova u naslovu',
+            'title.min' => 'Premali broj znakova u naslovu',
             'content.required' => 'Unos sadržaja je obavezan'
         ];
     }

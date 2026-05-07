@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -18,18 +19,9 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    public function store(Request $request) {
-        $credentials = $request->validate([
-            'title' => 'required',
-            'content' => 'required'
-        ]);
-
-        /* $post = new Post();
-        $post->title = $credentials['title'];
-        $post->content = $credentials['content'];
-        $post->save(); */
-
-        $post = Post::create($credentials);
+    public function store(StorePostRequest $request) {
+        
+        $post = Post::create($request->validated());
 
         return redirect()->route('posts.show', $post->id)->with('success', 'Novi post je uspješno kreiran');
     }
@@ -46,15 +38,11 @@ class PostController extends Controller
         return view('posts.edit', compact('post'));
     }
 
-    public function update(Request $request, $id) {
-        $credentials = $request->validate([
-            'title' => 'required',
-            'content' => 'required'
-        ]);
+    public function update(StorePostRequest $request, $id) {
 
         $post = Post::findOrFail($id);
 
-        $post->update($credentials);
+        $post->update($request->validated());
 
         return redirect()->route('posts.show', $post->id)->with('success', 'Post je ažuriran');
     }
