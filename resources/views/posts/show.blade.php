@@ -12,6 +12,8 @@
 
     <h2>{{ $post->title }}</h2>
     <p>{{ $post->content }}</p>
+    <p><i>Objavljeno: {{ $post->created_at->locale('hr')->diffForHumans() }}</i></p>
+
     <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary mb-1">Uredi post</a>
 
     <form action="{{ route('posts.destroy', $post->id) }}" method="POST">

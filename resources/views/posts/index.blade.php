@@ -11,21 +11,26 @@
     @endif
 
     <h1>Svi postovi</h1>
-
-    @forelse ($posts as $post)
-        <h2>{{ $post->title }}</h2>
-        <p>{{ $post->content }}</p>
-        <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">Detalji</a>
-        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-success">Uredi</a>
-        <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display: inline-block">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Jeste li sigurni?')">Obriši</button>
-        </form>
-        <hr>
-    @empty
-        <p>Nema postova u bazi</p>
-    @endforelse
+    <div class="col-12 col-md-6">
+        @forelse ($posts as $post)
+            <h2>{{ $post->title }}</h2>
+            <p>{{ Str::words($post->content, 20) }}</p>
+            <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">Detalji</a>
+            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-success">Uredi</a>
+            <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display: inline-block">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Jeste li sigurni?')">Obriši</button>
+            </form>
+            <hr>
+        @empty
+            <p>Nema postova u bazi</p>
+            <a href="{{ route('posts.create') }}" class="btn btn-primary">Dodaj novi post</a>
+        @endforelse
+    </div>
+    <div>
+        <p>Ukupno postova: {{ $post->count() }}</p>
+    </div>
 
     
 @endsection
